@@ -15,9 +15,16 @@ namespace Words
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             Thread.Sleep(1000);
+
+
             int i = 0;
             int l = 0;
-            StreamReader input = new StreamReader("C:\\Users\\evgen\\Desktop\\Sample.txt");
+
+            string projectDirectory = Directory.GetCurrentDirectory();
+            string filePathInput = Path.Combine(projectDirectory, "Sample.txt");
+            string filePathOutput = Path.Combine(projectDirectory, "Result.txt");
+
+            StreamReader input = new StreamReader(filePathInput);
             String[] contents = input.ReadToEnd()
                                                 .ToLower()
                                                 .Replace(",", "")
@@ -39,7 +46,7 @@ namespace Words
 						  orderby dict[k] descending
                               select k;
             
-            using (StreamWriter output = new StreamWriter("C:\\Users\\evgen\\Desktop\\Result.txt"))
+            using (StreamWriter output = new StreamWriter(filePathOutput))
             {
                 foreach (String k in ordered)
                 {
